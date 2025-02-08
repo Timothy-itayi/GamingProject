@@ -1,0 +1,22 @@
+{
+  "name": "game",
+  "version": "1.0.0",
+  "description": "c++ game using electron.js",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:engine": "cd game_engine && node-gyp rebuild",
+    "build": "npm run build:engine",
+    "dev": "electron . --debug"
+  },
+  "dependencies": {
+    "node-addon-api": "^7.0.0"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^13.6.9",
+     "node-gyp": "^9.4.0"
+  }
+}
