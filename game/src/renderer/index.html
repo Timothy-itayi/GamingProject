@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Adventure Game</title>
+    
+    <!-- Adding some basic styles inline for now - we'll move these to a separate CSS file later -->
+    <style>
+        /* Using CSS variables for easy theme management */
+        :root {
+            --bg-primary: #1a1a1a;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --accent-color: #4a9eff;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+        }
+
+        .game-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 2rem;
+            box-sizing: border-box;
+        }
+
+        .scene-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0; /* Initially hidden, will be animated with GSAP */
+        }
+
+        .scene-text {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .choices-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .choice-button {
+            background: transparent;
+            border: 2px solid var(--accent-color);
+            color: var(--text-primary);
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: 1rem;
+            text-align: left;
+            opacity: 0; /* Initially hidden, will be animated with GSAP */
+        }
+
+        .choice-button:hover {
+            background-color: var(--accent-color);
+        }
+
+        .status-bar {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            display: flex;
+            gap: 1rem;
+            opacity: 0; /* Initially hidden, will be animated with GSAP */
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <!-- Status bar for game info -->
+        <div class="status-bar">
+            <button id="save-button" class="choice-button">Save Game</button>
+            <button id="load-button" class="choice-button">Load Game</button>
+        </div>
+
+        <!-- Main game content -->
+        <div class="scene-container">
+            <div class="scene-text" id="scene-text">
+                Welcome to the Text Adventure Game. Your journey begins here...
+            </div>
+            
+            <div class="choices-container" id="choices-container">
+                <!-- Example choices - these will be populated dynamically -->
+                <button class="choice-button">Begin your adventure</button>
+                <button class="choice-button">Check your inventory</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- GSAP for animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    
+    <!-- Our game interface script -->
+    <script>
+        // Initialize animations when the document is ready
+        document.addEventListener('DOMContentLoaded', () => {
+            // Create our initial animation timeline
+            const tl = gsap.timeline();
+            
+            // Fade in the scene container
+            tl.to('.scene-container', {
+                opacity: 1,
+                duration: 1,
+                ease: 'power2.out'
+            });
+
+            // Stagger animate the choices
+            tl.to('.choice-button', {
+                opacity: 1,
+                y: 0,
+                duration: 0.5,
+                stagger: 0.1,
+                ease: 'back.out(1.2)'
+            });
+
+            // Fade in the status bar
+            tl.to('.status-bar', {
+                opacity: 1,
+                duration: 0.5
+            });
+
+            // When we have our game engine connected, we'll initialize it here
+            if (window.gameAPI) {
+                console.log('Game engine detected, initializing...');
+                window.gameAPI.initialize();
+            } else {
+                console.log('Running in browser mode (game engine not connected)');
+            }
+        });
+    </script>
+</body>
+</html>
