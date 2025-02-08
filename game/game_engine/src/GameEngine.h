@@ -9,7 +9,7 @@
 //We can start defining the object of our class with
 // name and description. This will be the bare bones of the project
     public struct Scene_Composition{ 
-
+        std::int ID;
         std::string name;
         std::string description
        
