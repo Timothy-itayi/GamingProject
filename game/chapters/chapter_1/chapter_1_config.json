@@ -1,0 +1,12 @@
+{
+    "chapter_1": {
+        "title": "The Call to Adventure",
+        "starting_scene": "village_square",
+        "available_scenes": [
+            "village_square",
+            "blacksmith_forge", 
+            "elder_hut",
+            "mountain_path"
+        ]
+    }
+}
