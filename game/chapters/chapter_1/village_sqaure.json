@@ -1,0 +1,11 @@
+{
+    "scene_id": "village_square",
+    "title": "The Village Square",
+    "is_starting_scene": true,
+    "description": "The village square buzzes with nervous energy...",
+    "choices": ["   "],
+    "state": {
+        "visited": false,
+        "available_exits": ["blacksmith_forge", "elder_hut", "mountain_path"]
+    }
+}
